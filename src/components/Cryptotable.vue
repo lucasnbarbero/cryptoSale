@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    <div class="d-flex table-responsive">
+    <div class="d-flex">
       <table class="table text-center table-hover table-striped table-bordered">
         <thead>
           <tr>
@@ -22,7 +21,6 @@
         </tbody>
       </table>
     </div>
-  </div>
 </template>
 
 <script>

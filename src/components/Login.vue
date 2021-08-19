@@ -1,6 +1,7 @@
 <template>
   <form class="form-inline" v-if="!access">
     <div class="input-group">
+      <span class="input-group-text" id="basic-addon1"></span>
       <input
         type="password"
         class="form-control"
@@ -37,6 +38,7 @@ export default {
     return {
       username: null,
       access: false,
+      alertNotification: 'Ingrese el nombre de usuario para comenzar a operar',
     }
   },
   methods: {

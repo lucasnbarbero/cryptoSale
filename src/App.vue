@@ -10,18 +10,21 @@
     </div>
     <Login />
   </nav>
+  <div class="alert alert-info px-5" v-if="!$store.state.access">
+    Ingrese nombre de usuario para comenzar a operar
+  </div>
   <div class="container">
-  <router-view />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Login from './components/Login.vue'
+import Login from "./components/Login.vue";
 
-  export default {
-   name: 'App',
-   components: {
-     Login,
-   },
-  }
+export default {
+  name: "App",
+  components: {
+    Login,
+  },
+};
 </script>

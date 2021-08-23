@@ -1,19 +1,14 @@
 <template>
-  <div v-if="$store.state.access">
-    <div class="row text-center mt-3 mb-5">
-      <h1>Bienvenido @{{ $store.state.userLogin }}</h1>
-    </div>
-  </div>
-  <Cryptotable />
+  <Operaciones />
 </template>
 
 <script>
-import Cryptotable from "../components/Cryptotable.vue";
+import Operaciones from "../components/Operaciones.vue";
 
 export default {
-  name: "Home",
+  name: "Prueba",
   components: {
-    Cryptotable,
+    Operaciones,
   },
   beforeCreate() {
     this.$store.commit('setBtc');
@@ -25,3 +20,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>

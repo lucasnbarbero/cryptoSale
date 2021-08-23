@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiConn = axios.create({
-  baseURL: 'https://criptoya.com/api'
+  baseURL: 'https://criptoya.com/api/'
 })
 
 export default {

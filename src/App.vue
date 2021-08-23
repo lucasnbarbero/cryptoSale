@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar px-5 navbar-expand navbar-dark bg-dark">
+  <nav class="navbar px-5 navbar-fixed-top navbar-dark bg-dark">
     <a class="navbar-brand" href="#">CryptoSales</a>
     <div class="collapse navbar-collapse px-4">
-      <ul class="navbar-nav" v-if="$store.state.access">
+      <ul class="navbar-nav" v-if="!$store.state.access">
         <li class="nav-item">
           <router-link to="/" class="nav-link">Home</router-link>
         </li>
@@ -10,8 +10,10 @@
     </div>
     <Login />
   </nav>
+
   <div class="alert alert-info px-5" v-if="!$store.state.access">
-    Ingrese nombre de usuario para comenzar a operar
+    Ingrese nombre de usuario para comenzar a operar.
+    <strong>Username: LucasBarbero</strong>
   </div>
   <div class="container">
     <router-view />

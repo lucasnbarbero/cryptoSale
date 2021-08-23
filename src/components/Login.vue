@@ -14,19 +14,7 @@
     </div>
   </form>
   <form class="form-inline" v-if="access">
-    <fieldset disabled>
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control"
-        :placeholder="'Bienvenido ' +this.username"
-        disabled
-      />
-      <button class="btn btn-light" v-on:click="loginOk">
-        Login
-      </button>
-    </div>
-    </fieldset>
+    <p class="text-white">User: @{{this.username}}</p>
   </form>
 
 </template>
@@ -45,7 +33,6 @@ export default {
     loginOk() {
       if (this.username === this.$store.state.userLogin) {
         this.$store.commit("setLogin", true);
-        this.$store.commit("setNotification", true);
         this.access = true;
         alert("Ingreso correcto");
       } else {

@@ -1,87 +1,82 @@
 <template>
-    <div class="d-flex">
-      <table class="table text-center table-hover table-striped table-bordered">
-        <thead>
-          <tr>
-            <th scope="col" v-for="field of fields" :key="field.id">
-              {{ field }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr scope="col" v-for="coin of coins" :key="coin">
-            <th scope="row">{{ coin.name }}</th>
-            <td>${{ formatPrice(coin.price.ask) }}</td>
-            <td>${{ formatPrice(coin.price.totalAsk) }}</td>
-            <td>${{ formatPrice(coin.price.bid) }}</td>
-            <td>${{ formatPrice(coin.price.totalBid) }}</td>
-            <td><button class="btn btn-success">Comprar</button></td>
-            <td><button class="btn btn-danger">Vender</button></td>
-          </tr>
-        </tbody>
-      </table>
+  <div v-if="$store.state.access">
+    <div class="card text-center mb-4">
+      <div class="card-header"><strong>Precio de criptomonedas</strong></div>
+      <div class="card-body">
+        <div class="d-flex table-responsive">
+          <table class="table table-hover table-striped table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" v-for="field of fields" :key="field.id">
+                  {{ field }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr scope="col" v-for="coin of $store.state.coin" :key="coin">
+                <th scope="row">{{ coin.name }}</th>
+                <td>${{ formatPrice(coin.price.ask) }}</td>
+                <td>${{ formatPrice(coin.price.totalAsk) }}</td>
+                <td>${{ formatPrice(coin.price.bid) }}</td>
+                <td>${{ formatPrice(coin.price.totalBid) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+    <div class="card text-center mb-4">
+      <div class="card-header"><strong>Precios del dólar</strong></div>
+      <div class="card-body">
+        <div class="d-flex table-responsive">
+          <table class="table table-hover table-striped table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" v-for="name of dolars.name" :key="name">
+                  {{ name }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="col">
+                  ${{ formatPrice($store.state.dolar.oficial) }}
+                </td>
+                <td scope="col">
+                  ${{ formatPrice($store.state.dolar.solidario) }}
+                </td>
+                <td scope="col">
+                  ${{ formatPrice($store.state.dolar.mep) }}
+                </td>
+                <td scope="col">
+                  ${{ formatPrice($store.state.dolar.ccl) }}
+                </td>
+                <td scope="col">
+                  ${{ formatPrice($store.state.dolar.ccb) }}
+                </td>
+                <td scope="col">
+                  ${{ formatPrice($store.state.dolar.blue) }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import request from "../services/apiCriptoya.js";
-
 export default {
   name: "Cryptotable",
   data() {
     return {
-      fields: [
-        "Moneda",
-        "Compra",
-        "Compra Total",
-        "Venta",
-        "Venta Total",
-        "",
-        ""
-      ],
-      coins: [
-        {
-          name: "Bitcoin",
-          id: 1,
-          price: null,
-        },
-        {
-          name: "Ethereum",
-          id: 2,
-          price: null,
-        },
-        {
-          name: "Dai",
-          id: 3,
-          price: null,
-        },
-        {
-          name: "USDC",
-          id: 4,
-          price: null,
-        },
-        {
-          name: "Ripple",
-          id: 5,
-          price: null,
-        },
-      ],
+      fields: ["Moneda", "Compra", "Compra Total", "Venta", "Venta Total"],
+      dolars: {
+        name: ["Oficial", "Solidario", "MEP", "CCL", "CCB", "Blue"],
+      },
+      coins: this.$store.state.coin,
     };
-  },
-  created() {
-    request.getBTC().then((response) => (this.coins[0].price = response.data)),
-      request
-        .getETH()
-        .then((response) => (this.coins[1].price = response.data)),
-      request
-        .getDAI()
-        .then((response) => (this.coins[2].price = response.data)),
-      request
-        .getUSDC()
-        .then((response) => (this.coins[3].price = response.data)),
-      request
-        .getXRP()
-        .then((response) => (this.coins[4].price = response.data));
   },
   methods: {
     formatPrice(value) {

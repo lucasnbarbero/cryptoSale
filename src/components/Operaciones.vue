@@ -61,7 +61,7 @@
       </div>
     </div>
   </div>
-  {{precio}}
+  {{ precio }}
 </template>
 
 <script>
@@ -77,17 +77,13 @@ export default {
         money: null,
         datetime: new Date(),
       },
-      moneda: null
+      coins: this.$store.state.coin,
     };
   },
   computed: {
-    precio(){
-      if (this.crypto_code === 'Bitcoin') {
-        debugger;
-        this.moneda = this.$store.state.coin.btc.ask;
-        console.log(this.moneda);
-        
-        return this.moneda
+    precio() {
+      if (this.action === 'purchase') {
+        return coins[1];
       }
     }
   }

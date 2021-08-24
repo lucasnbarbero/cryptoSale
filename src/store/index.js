@@ -4,7 +4,7 @@ import apiCriptoya from '../services/apiCriptoya'
 export default createStore({
   state: {
     userLogin: 'LucasBarbero',
-    access: null,
+    access: false,
 
     coin: [
       {

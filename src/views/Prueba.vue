@@ -11,12 +11,12 @@ export default {
     Operaciones,
   },
   beforeCreate() {
-    this.$store.commit('setBtc');
-    this.$store.commit('setEth');
-    this.$store.commit('setDai');
-    this.$store.commit('setUsdc');
-    this.$store.commit('setXrp');
-    this.$store.commit('setDolar');
+    this.$store.commit("setBtc");
+    this.$store.commit("setEth");
+    this.$store.commit("setDai");
+    this.$store.commit("setUsdc");
+    this.$store.commit("setXrp");
+    this.$store.commit("setDolar");
   },
 };
 </script>

@@ -3,14 +3,14 @@
     <tabla-historial class="t-historial" @brothersaid="respuestaDaughter($event)"></tabla-historial>
   </div>
   <div class="row d-flex justify-content-center">
-  <modal class="main-modal" v-if="this.verHijo" @ststersaid="respuestaSon()"></modal>
+  <modal class="main-modal" v-if="this.verHijo" @sistersaid="respuestaDaughter($event)"></modal>
   </div>
 </template>
 
 <script>
 import apiClient from "../services/apiClient";
 import TablaHistorial from "../components/TablaHistorial.vue"
-import Modal from "../components/Modal.vue"
+import Modal from "../components/ModalHistorial.vue"
 
 export default {
   name: "Historial",

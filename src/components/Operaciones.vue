@@ -47,15 +47,17 @@
             Aceptar
           </button>
           <button class="btn btn-danger mx-3" @click="cancelarOperacion()">
-            Aceptar
+            Cancelar
           </button>
         </div>
       </div>
     </div>
   </div>
+  {{ operacion }}
 </template>
 
 <script>
+import apiClient from "../services/apiClient";
 export default {
   name: "Operaciones",
   data() {
@@ -77,14 +79,16 @@ export default {
       let completo = this.validarVacios();
       if (completo === true) {
         apiClient
-          .postApiClient(JSON.stringify(this.operacion))
+          .postApiClient(this.operacion)
           .then((response) => {
+            console.log(response);
             if (response.status !== 201) {
-              alert("Invalido");
+              console.log("transacción MAL!");
             }
           })
           .catch((error) => {
-            alert(error);
+            console.log(error);
+            this.errored = true;
           });
         alert("Realizado!");
         this.limpiarDatos();

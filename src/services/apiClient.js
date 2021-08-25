@@ -6,19 +6,19 @@ const apiClient = axios.create({
 });
 
 export default {
-    getApiClien() {
+    getApiClient() {
         return apiClient.get('transactions?q={"user_id": "LucasBarbero"}');
     },
-    postApiClien(obj) {
+    postApiClient(obj) {
         return apiClient.post('/transactions', obj);
     },
-    getApiClienId(id) {
+    getApiClientId(id) {
         return apiClient.get(`/transactions/${id}`);
     },
-    deleteApiClien(id) {
+    deleteApiClient(id) {
         return apiClient.delete(`/transactions/${id}`);
     },
-    editApiClien(id, obj) {
+    editApiClient(id, obj) {
         return apiClient.patch(`/transactions/${id}`, obj);
     },
 };

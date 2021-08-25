@@ -43,16 +43,10 @@
               <span>{{ totalPay }}</span>
             </div>
           </div>
-          <button
-            class="btn btn-success mx-3"
-            @click="realizarOperacion()"
-          >
+          <button class="btn btn-success mx-3" @click="realizarOperacion()">
             Aceptar
           </button>
-          <button
-            class="btn btn-danger mx-3"
-            @click="cancelarOperacion()"
-          >
+          <button class="btn btn-danger mx-3" @click="cancelarOperacion()">
             Aceptar
           </button>
         </div>
@@ -82,7 +76,17 @@ export default {
     realizarOperacion() {
       let completo = this.validarVacios();
       if (completo === true) {
-        alert("Realizado!" + JSON.stringify(this.operacion));
+        apiClient
+          .postApiClient(JSON.stringify(this.operacion))
+          .then((response) => {
+            if (response.status !== 201) {
+              alert("Invalido");
+            }
+          })
+          .catch((error) => {
+            alert(error);
+          });
+        alert("Realizado!");
         this.limpiarDatos();
       } else {
         alert("Todos los campos deben estar completos");
@@ -140,7 +144,7 @@ export default {
     },
     cancelarOperacion() {
       this.limpiarDatos();
-      alert('Operacion cancelada');
+      alert("Operacion cancelada");
     },
     validarVacios() {
       if (

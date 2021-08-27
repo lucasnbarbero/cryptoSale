@@ -81,13 +81,12 @@ export default {
         apiClient
           .postApiClient(this.operacion)
           .then((response) => {
-            console.log(response);
             if (response.status !== 201) {
-              console.log("transacción MAL!");
+              alert("No se pudo realizar la transacción!");
             }
           })
           .catch((error) => {
-            console.log(error);
+            alert(error);
             this.errored = true;
           });
         alert("Realizado!");
@@ -95,16 +94,6 @@ export default {
       } else {
         alert("Todos los campos deben estar completos");
       }
-      /*apiClient
-        .postApiClien(this.operacion)
-        .then((response) => {
-          if (response.status !== 201) {
-            alert("Invalido");
-          }
-        })
-        .catch((error) => {
-          alert(error);
-        });*/
     },
     precio() {
       if (this.operacion.action === "purchase") {

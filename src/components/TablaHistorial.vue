@@ -1,26 +1,23 @@
 <template>
   <div class="row">
-    <table class="table mt-4 table-striped table-sm table-bordered text-center">
+    {{elemento}}
+    <table class="table mt-4 table-striped table-bordered text-center">
       <thead>
         <tr>
           <th scope="col" v-for="field of fields" :key="field">{{ field }}</th>
         </tr>
       </thead>
       <tbody class="text-center">
-        <tr v-for="operacion of operaciones" :key="operacion._id">
+        <tr v-for="operacion of transacciones" :key="operacion._id">
           <th>{{ actionValue(operacion.action) }}</th>
           <td>{{ criptoValue(operacion.crypto_code) }}</td>
           <td>{{ operacion.crypto_amount }}</td>
           <td class="mx-2">${{ formatPrice(operacion.money) }}</td>
           <td class="mx-2">{{ formatDate(operacion.datetime) }}</td>
           <td>
-            <div class="btn-group mx-3">
-              <button class="btn btn-sm btn-primary" @click="mensaje()">
-                Ver
+              <button class="btn btn-primary" @click="mensaje(); enviarId(operacion._id)">
+                Detalles
               </button>
-              <button class="btn btn-sm btn-success">Editar</button>
-              <button class="btn btn-sm btn-danger">Eliminar</button>
-            </div>
           </td>
         </tr>
       </tbody>
@@ -29,7 +26,6 @@
 </template>
 
 <script>
-import apiClient from "../services/apiClient";
 import moment from 'moment';
 
 export default {
@@ -45,19 +41,21 @@ export default {
         "Fecha y hora",
         "Acciones",
       ],
-      operaciones: null,
+      operaciones: [],
+      detalleOperacion: {},
     };
   },
 
-  beforeCreate() {
-    apiClient.getApiClient().then((result) => {
-      this.operaciones = result.data;
-    });
+  props: {
+    transacciones: null,
   },
 
   methods: {
     mensaje() {
       this.$emit("brothersaid", true);
+    },
+    enviarId(id){
+      this.$emit("enviarId", id);
     },
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(".", ",");
@@ -93,6 +91,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

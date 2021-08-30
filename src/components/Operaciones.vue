@@ -53,7 +53,6 @@
       </div>
     </div>
   </div>
-  {{ operacion }}
 </template>
 
 <script>

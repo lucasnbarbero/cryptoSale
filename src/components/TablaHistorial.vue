@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    {{elemento}}
+    {{ elemento }}
     <table class="table mt-4 table-striped table-bordered text-center">
       <thead>
         <tr>
@@ -15,9 +15,26 @@
           <td class="mx-2">${{ formatPrice(operacion.money) }}</td>
           <td class="mx-2">{{ formatDate(operacion.datetime) }}</td>
           <td>
-              <button class="btn btn-primary" @click="mensaje(); enviarId(operacion._id)">
+            <div class="btn-group">
+              <button
+                class="btn btn-sm btn-primary"
+                @click="
+                  mensaje();
+                  enviarId(operacion._id, false);
+                "
+              >
                 Detalles
               </button>
+              <button
+                class="btn btn-sm btn-danger"
+                @click="
+                  eliminarPorId(operacion._id);
+                  actualizarTabla();
+                "
+              >
+                Eliminar
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -26,7 +43,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   name: "TablaHistorial",
@@ -51,18 +68,24 @@ export default {
   },
 
   methods: {
+    actualizarTabla() {
+      this.$emit("updateTable");
+    },
     mensaje() {
       this.$emit("brothersaid", true);
     },
-    enviarId(id){
+    enviarId(id) {
       this.$emit("enviarId", id);
+    },
+    eliminarPorId(id) {
+      this.$emit("deleteId", id);
     },
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(".", ",");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     formatDate(value) {
-      return moment(String(value)).format('DD/MM/YYYY | hh:ss');
+      return moment(String(value)).format("DD/MM/YYYY | hh:ss");
     },
     actionValue(action) {
       let accion;

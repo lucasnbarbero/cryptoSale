@@ -51,12 +51,6 @@
                 Editar
               </button>
               <button
-                class="btn btn-danger"
-                @click="eliminar(this.elemento._id); actualizarTabla()"
-              >
-                Eliminar
-              </button>
-              <button
                 class="btn btn-secondary"
                 @click="
                   mensaje();
@@ -150,9 +144,9 @@ export default {
       detalleOperacion: null,
       msg: null,
       msgTitulo: null,
-      editar: false,
       precioActual: null,
       idEdit: null,
+      editar: false,
     };
   },
 
@@ -165,8 +159,8 @@ export default {
   },
 
   methods: {
-    eliminar() {
-      this.$emit("deleteId")
+    eliminarPorId() {
+      this.$emit("eliminar", this.elemento._id);
     },
     mensaje() {
       this.$emit("sistersaid", false);

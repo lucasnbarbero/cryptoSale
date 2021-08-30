@@ -4,6 +4,8 @@
       class="t-historial"
       @brothersaid="respuestaSon($event)"
       @enviarId="tomarID($event)"
+      @updateTable="getApi()"
+      @deleteId="eliminarID($event)"
       :transacciones="transacciones"
     ></tabla-historial>
   </div>
@@ -14,7 +16,6 @@
         v-if="this.verHijo"
         @sistersaid="respuestaDaughter($event)"
         @updateTable="getApi()"
-        @eliminar="deleteId(this.detalleOperacion._id)"
         :elemento="detalleOperacion"
       ></modal>
     </transition>
@@ -38,6 +39,7 @@ export default {
       detalleOperacion: [],
       idEditar: null,
       transacciones: null,
+      eliminar: false,
     };
   },
 
@@ -58,11 +60,12 @@ export default {
         this.transacciones = result.data;
       });
     },
-    deleteId(id) {
+    eliminarID(id) {
+      debugger;
       apiClient.deleteApiClient(id).then((result) => {
         console.log(result);
+        alert("Eliminado!");
       });
-      alert("Eliminado");
     },
     respuestaDaughter(val) {
       this.verHijo = val;

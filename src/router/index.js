@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Transacciones from '../views/Transacciones.vue'
 import Historial from '../views/Historial.vue'
 import Estado from '../views/Estado.vue'
+import Inversiones from '../views/Inversiones.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/estado',
     name: 'Estado',
     component: Estado
+  },
+  {
+    path: '/inversiones',
+    name: 'Inversiones',
+    component: Inversiones
   },
 ]
 

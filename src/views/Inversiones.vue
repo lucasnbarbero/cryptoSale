@@ -1,22 +1,75 @@
 <template>
-  <div class="row mb-3 justify-content-center">
-      <h1 class="text-center">Estado de cuenta</h1>
+  <div class="row">
+    <h1 class="text-center mb-4">Inversiones</h1>
   </div>
   <div class="row justify-content-center">
     <div class="col-sm-8">
-      <table class="table table-bordered table-hover">
-        <thead class="text-center">
+      <table class="table table-hover table-bordered">
+        <thead>
           <tr>
-            <th v-for="field of fields" :key="field">{{ field }}</th>
+            <th scope="col">Criptomoneda</th>
+            <th scope="col">Estado de inversión</th>
           </tr>
         </thead>
-        <tbody class="text-center">
-          <tr v-for="moneda of $store.state.coin" :key="moneda">
-            <th v-if="moneda.disponibles">{{ moneda.name }}</th>
-            <td v-if="moneda.disponibles">{{ moneda.cantOp }}</td>
-            <td v-if="moneda.disponibles" :class="claseMonto(moneda.disponibles)">{{ moneda.disponibles }}</td>
-            <td v-if="moneda.disponibles" :class="claseMonto(moneda.monto)">
-              ${{ formatPrice(moneda.monto) }}
+        <tbody>
+          <tr>
+            <th>Bitcoin</th>
+            <td :class="claseMonto">
+              ${{
+                formatPrice(
+                  $store.state.coin[0].price.ask *
+                    $store.state.coin[0].disponibles -
+                    $store.state.coin[0].monto
+                )
+              }}
+            </td>
+          </tr>
+          <tr>
+            <th>Etherum</th>
+            <td :class="claseMonto">
+              ${{
+                formatPrice(
+                  $store.state.coin[1].price.ask *
+                    $store.state.coin[1].disponibles -
+                    $store.state.coin[1].monto
+                )
+              }}
+            </td>
+          </tr>
+          <tr>
+            <th>Dai</th>
+            <td :class="claseMonto">
+              ${{
+                formatPrice(
+                  $store.state.coin[2].price.ask *
+                    $store.state.coin[2].disponibles -
+                    $store.state.coin[2].monto
+                )
+              }}
+            </td>
+          </tr>
+          <tr>
+            <th>USDC</th>
+            <td :class="claseMonto">
+              ${{
+                formatPrice(
+                  $store.state.coin[3].price.ask *
+                    $store.state.coin[3].disponibles -
+                    $store.state.coin[3].monto
+                )
+              }}
+            </td>
+          </tr>
+          <tr>
+            <th>Ripple</th>
+            <td :class="claseMonto">
+              ${{
+                formatPrice(
+                  $store.state.coin[4].price.ask *
+                    $store.state.coin[4].disponibles -
+                    $store.state.coin[4].monto
+                )
+              }}
             </td>
           </tr>
         </tbody>
@@ -32,27 +85,19 @@ export default {
   data() {
     return {
       transacciones: null,
-      fields: [
-        "Moneda",
-        "Operaciones realizadas",
-        "Cantidad disponible",
-        "Total en $",
-      ],
     };
   },
   created() {
+    this.$store.commit("setBtc");
+    this.$store.commit("setEth");
+    this.$store.commit("setDai");
+    this.$store.commit("setUsdc");
+    this.$store.commit("setXrp");
+    this.$store.commit("setDolar");
+
     this.getApi();
   },
   methods: {
-    claseMonto(price) {
-      let clase = "";
-      if (price > 0) {
-        clase = "text-green";
-      } else if (price < 0) {
-        clase = "text-danger";
-      }
-      return clase;
-    },
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(".", ",");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -63,27 +108,22 @@ export default {
         for (let i = 0; i < this.transacciones.length; i++) {
           if (this.transacciones[i].action === "purchase") {
             if (this.transacciones[i].crypto_code === "btc") {
-              this.$store.state.coin[0].cantOp += 1;
               this.$store.state.coin[0].monto += this.transacciones[i].money;
               this.$store.state.coin[0].disponibles +=
                 this.transacciones[i].crypto_amount;
             } else if (this.transacciones[i].crypto_code === "eth") {
-              this.$store.state.coin[1].cantOp += 1;
               this.$store.state.coin[1].monto += this.transacciones[i].money;
               this.$store.state.coin[1].disponibles +=
                 this.transacciones[i].crypto_amount;
             } else if (this.transacciones[i].crypto_code === "dai") {
-              this.$store.state.coin[2].cantOp += 1;
               this.$store.state.coin[2].monto += this.transacciones[i].money;
               this.$store.state.coin[2].disponibles +=
                 this.transacciones[i].crypto_amount;
             } else if (this.transacciones[i].crypto_code === "usdc") {
-              this.$store.state.coin[3].cantOp += 1;
               this.$store.state.coin[3].monto += this.transacciones[i].money;
               this.$store.state.coin[3].disponibles +=
                 this.transacciones[i].crypto_amount;
             } else if (this.transacciones[i].crypto_code === "xrp") {
-              this.$store.state.coin[4].cantOp += 1;
               this.$store.state.coin[4].monto += this.transacciones[i].money;
               this.$store.state.coin[4].disponibles +=
                 this.transacciones[i].crypto_amount;
@@ -91,27 +131,22 @@ export default {
           }
           if (this.transacciones[i].action === "sale") {
             if (this.transacciones[i].crypto_code === "btc") {
-              this.$store.state.coin[0].cantOp += 1;
               this.$store.state.coin[0].monto -= this.transacciones[i].money;
               this.$store.state.coin[0].disponibles -=
                 this.transacciones[i].crypto_amount;
             } else if (this.transacciones[i].crypto_code === "eth") {
-              this.$store.state.coin[1].cantOp += 1;
               this.$store.state.coin[1].monto -= this.transacciones[i].money;
               this.$store.state.coin[1].disponibles -=
                 this.transacciones[i].crypto_amount;
             } else if (this.transacciones[i].crypto_code === "dai") {
-              this.$store.state.coin[2].cantOp += 1;
               this.$store.state.coin[2].monto -= this.transacciones[i].money;
               this.$store.state.coin[2].disponibles -=
                 this.transacciones[i].crypto_amount;
             } else if (this.transacciones[i].crypto_code === "usdc") {
-              this.$store.state.coin[3].cantOp += 1;
               this.$store.state.coin[3].monto -= this.transacciones[i].money;
               this.$store.state.coin[3].disponibles -=
                 this.transacciones[i].crypto_amount;
             } else if (this.transacciones[i].crypto_code === "xrp") {
-              this.$store.state.coin[4].cantOp += 1;
               this.$store.state.coin[4].monto -= this.transacciones[i].money;
               this.$store.state.coin[4].disponibles -=
                 this.transacciones[i].crypto_amount;
@@ -125,7 +160,4 @@ export default {
 </script>
 
 <style>
-.text-green {
-    color: #28a745;
-}
 </style>

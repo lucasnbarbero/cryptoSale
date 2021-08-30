@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import apiCriptoya from '../services/apiCriptoya'
+import apiClient from '../services/apiClient'
 
 export default createStore({
   state: {
@@ -11,27 +12,41 @@ export default createStore({
         name: "Bitcoin",
         id: 'btc',
         price: null,
+        cantOp: 0,
+        monto: 0,
+        disponibles: 0,
       },
       {
         name: "Ethereum",
         id: 'eth',
         price: null,
+        cantOp: 0,
+        monto: 0,
+        disponibles: 0,
       },
       {
         name: "Dai",
         id: 'dai',
         price: null,
+        cantOp: 0,
+        monto: 0,
+        disponibles: 0,
       },
       {
         name: "USDC",
         id: 'usdc',
         price: null,
+        cantOp: 0,
+        monto: 0,
+        disponibles: 0,
       },
       {
         name: "Ripple",
         id: 'xrp',
         price: null,
-        
+        cantOp: 0,
+        monto: 0,
+        disponibles: 0,
       },
     ],
     dolar: null,

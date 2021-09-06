@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Transacciones from '../views/Transacciones.vue'
-import Historial from '../views/Historial.vue'
-import Estado from '../views/Estado.vue'
-import Inversiones from '../views/Inversiones.vue'
+import Transactions from '../views/Transactions.vue'
+import History from '../views/History.vue'
+import State from '../views/State.vue'
+import Investments from '../views/Investments.vue'
 
 const routes = [
   {
@@ -12,24 +12,24 @@ const routes = [
     component: Home
   },
   {
-    path: '/transacciones',
-    name: 'Transacciones',
-    component: Transacciones
+    path: '/transactions',
+    name: 'Transactions',
+    component: Transactions
   },
   {
-    path: '/historial',
-    name: 'Historial',
-    component: Historial
+    path: '/history',
+    name: 'History',
+    component: History
   },
   {
-    path: '/estado',
-    name: 'Estado',
-    component: Estado
+    path: '/state',
+    name: 'State',
+    component: State
   },
   {
-    path: '/inversiones',
-    name: 'Inversiones',
-    component: Inversiones
+    path: '/investments',
+    name: 'Investments',
+    component: Investments
   },
 ]
 

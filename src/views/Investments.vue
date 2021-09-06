@@ -4,7 +4,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-sm-8">
-      <table class="table table-hover table-bordered">
+      <table class="table text-center table-hover table-bordered">
         <thead>
           <tr>
             <th scope="col">Criptomoneda</th>

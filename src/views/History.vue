@@ -1,20 +1,20 @@
 <template>
   <div class="row d-flex justify-content-center" style="position: relative">
-    <tabla-historial
+    <table-history
       class="t-historial"
-      @brothersaid="respuestaSon($event)"
+      @brothersaid="responseSon($event)"
       @enviarId="tomarID($event)"
       @updateTable="getApi()"
       @deleteId="eliminarID($event)"
       :transacciones="transacciones"
-    ></tabla-historial>
+    ></table-history>
   </div>
   <div class="row d-flex justify-content-center">
     <transition name="bounce">
       <modal
         class="main-modal"
         v-if="this.verHijo"
-        @sistersaid="respuestaDaughter($event)"
+        @sistersaid="responseDaughter($event)"
         @updateTable="getApi()"
         :elemento="detalleOperacion"
       ></modal>
@@ -24,13 +24,13 @@
 
 <script>
 import apiClient from "../services/apiClient";
-import TablaHistorial from "../components/TablaHistorial.vue";
-import Modal from "../components/ModalHistorial.vue";
+import TableHistory from "../components/TableHistory.vue";
+import Modal from "../components/ModalHistory.vue";
 
 export default {
-  name: "Historial",
+  name: "History",
   components: {
-    TablaHistorial,
+    TableHistory,
     Modal,
   },
   data() {
@@ -67,10 +67,10 @@ export default {
         alert("Eliminado!");
       });
     },
-    respuestaDaughter(val) {
+    responseDaughter(val) {
       this.verHijo = val;
     },
-    respuestaSon(val) {
+    responseSon(val) {
       this.verHijo = val;
     },
     tomarID(id) {

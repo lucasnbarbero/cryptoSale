@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
 import apiCriptoya from '../services/apiCriptoya'
-import apiClient from '../services/apiClient'
 
 export default createStore({
   state: {

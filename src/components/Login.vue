@@ -1,19 +1,19 @@
 <template>
-  <form class="form-inline" v-if="this.$store.state.userLogin">
+  <form class="form-inline" v-if="!this.$store.state.access">
     <div class="input-group">
       <span class="input-group-text" id="basic-addon1">@</span>
       <input
         type="password"
         class="form-control"
         placeholder="Username"
-        v-model="username"
+        v-model="this.username"
       />
-      <button type="submit" class="btn btn-primary" v-on:click="loginOk">
+      <button type="submit" class="btn btn-primary" @click="loginOk()">
         Login
       </button>
     </div>
   </form>
-  <form class="form-inline" v-if="!this.$store.state.userLogin">
+  <form class="form-inline" v-if="this.$store.state.access">
     <p class="text-white">User: @{{this.username}}</p>
   </form>
 

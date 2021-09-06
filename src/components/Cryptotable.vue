@@ -45,18 +45,10 @@
                 <td scope="col">
                   ${{ formatPrice($store.state.dolar.solidario) }}
                 </td>
-                <td scope="col">
-                  ${{ formatPrice($store.state.dolar.mep) }}
-                </td>
-                <td scope="col">
-                  ${{ formatPrice($store.state.dolar.ccl) }}
-                </td>
-                <td scope="col">
-                  ${{ formatPrice($store.state.dolar.ccb) }}
-                </td>
-                <td scope="col">
-                  ${{ formatPrice($store.state.dolar.blue) }}
-                </td>
+                <td scope="col">${{ formatPrice($store.state.dolar.mep) }}</td>
+                <td scope="col">${{ formatPrice($store.state.dolar.ccl) }}</td>
+                <td scope="col">${{ formatPrice($store.state.dolar.ccb) }}</td>
+                <td scope="col">${{ formatPrice($store.state.dolar.blue) }}</td>
               </tr>
             </tbody>
           </table>
